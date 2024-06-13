@@ -8,7 +8,7 @@ jobs:
       - run: sleep 3600
       - name: Log notice if cancelled for spot instance eviction
         if: ${{ always() }}
-        run:
+        run: |
           if [[ -f ~/spot_instance_evicted ]]
           then
             echo "::notice title=Spot instance evicted::The runner's spot instance was evicted by Azure for capacity. Re-trigger this job"
