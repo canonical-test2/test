@@ -6,3 +6,10 @@ jobs:
     runs-on: [self-hosted, data-platform, ubuntu, ARM64, 4cpu16ram]
     steps:
       - run: sleep 3600
+      - name: Log notice if cancelled for spot instance eviction
+        if: ${{ cancelled() }}
+        run:
+          if [[ -f ~/spot_instance_evicted ]]
+          then
+            echo "::notice title=Spot instance evicted::The runner's spot instance was evicted by Azure for capacity. Re-trigger this job"
+          fi
