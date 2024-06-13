@@ -7,7 +7,7 @@ jobs:
     steps:
       - run: sleep 3600
       - name: Log notice if cancelled for spot instance eviction
-        if: ${{ cancelled() }}
+        if: ${{ always() }}
         run:
           if [[ -f ~/spot_instance_evicted ]]
           then
