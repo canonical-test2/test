@@ -5,7 +5,6 @@ jobs:
   foo:
     runs-on: [self-hosted, data-platform, ubuntu, ARM64, 4cpu16ram]
     steps:
-      - run: |
-          import time
-          time.sleep(3600)
-        shell: python
+      - uses: actions/checkout@v4
+        with:
+          repository: torvalds/linux
