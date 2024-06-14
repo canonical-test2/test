@@ -7,10 +7,13 @@ jobs:
     steps:
       - run: echo "$GITHUB_OUTPUT"
       - run: echo 'foo bar'
-      - run: echo "::notice title=Hello::foobar runner's spot instance was evicted by Azure for capacity. Re-trigger this job"
-      - run: |
-          trap '' SIGINT SIGTERM
-          sleep 3600
+      - run: sleep 3600
+        id: tests
+      - run: sleep 3
+      - run: sleep 5
+        if: ${{ success() || (failure() && steps.tests.outcome == 'failure') }}
+      - run: sleep 4
+        if: ${{ !cancelled() }}
       - name: Log notice if cancelled for spot instance eviction
         if: ${{ always() }}
         run: |
