@@ -5,7 +5,9 @@ jobs:
   foo:
     runs-on: [self-hosted, data-platform, ubuntu, ARM64, 4cpu16ram]
     steps:
-      - run: sleep 90
+      - run: |
+          trap '' SIGINT SIGTERM
+          sleep 90
         timeout-minutes: 1
         id: tests
       - run: sleep 3
