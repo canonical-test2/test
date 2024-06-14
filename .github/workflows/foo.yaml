@@ -5,4 +5,7 @@ jobs:
   foo:
     runs-on: [self-hosted, data-platform, ubuntu, ARM64, 4cpu16ram]
     steps:
-      - run: sleep 3600
+      - run: |
+          import time
+          time.sleep(3600)
+        shell: python
