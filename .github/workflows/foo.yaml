@@ -5,15 +5,4 @@ jobs:
   foo:
     runs-on: [self-hosted, data-platform, ubuntu, ARM64, 4cpu16ram]
     steps:
-      - run: |
-          trap '' SIGINT SIGTERM
-          sleep 90
-        timeout-minutes: 1
-        id: tests
-      - run: sleep 3
-      - run: sleep 5
-        if: ${{ success() || (failure() && steps.tests.outcome == 'failure') }}
-      - run: sleep 4
-        if: ${{ !cancelled() }}
-      - run: sleep 2
-        if: ${{ always() }}
+      - run: sleep 3600
