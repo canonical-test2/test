@@ -5,19 +5,13 @@ jobs:
   foo:
     runs-on: [self-hosted, data-platform, ubuntu, ARM64, 4cpu16ram]
     steps:
-      - run: echo "$GITHUB_OUTPUT"
-      - run: echo 'foo bar'
-      - run: sleep 3600
+      - run: sleep 90
+        timeout-minutes: 1
         id: tests
       - run: sleep 3
       - run: sleep 5
         if: ${{ success() || (failure() && steps.tests.outcome == 'failure') }}
       - run: sleep 4
         if: ${{ !cancelled() }}
-      - name: Log notice if cancelled for spot instance eviction
+      - run: sleep 2
         if: ${{ always() }}
-        run: |
-          if [[ -f ~/spot_instance_evicted ]]
-          then
-            echo "::notice title=Spot instance evicted::The runner's spot instance was evicted by Azure for capacity. Re-trigger this job"
-          fi
