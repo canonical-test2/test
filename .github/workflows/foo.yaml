@@ -5,5 +5,5 @@ jobs:
   foo:
     runs-on: [self-hosted, data-platform, ubuntu, ARM64, 4cpu16ram]
     steps:
-      - if: ${{ !cancelled() }
+      - if: ${{ !cancelled() }}
         run: echo 'Hello, world!'
